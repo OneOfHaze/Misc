@@ -3,9 +3,10 @@
 import sys, getopt, os.path
 from ODSReader import ODSReader
 
+
 def main(argv):
-    inputfile = ''
-    outputfile = ''
+    inputFilename = ''
+    outputFilename = ''
 
     try:
         opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
@@ -33,13 +34,33 @@ def main(argv):
     # Open our output file...
     outputFile = open(outputFilename, 'w')
     
+    # Open input spreadsheet and grab sheet 1
     inputFile = ODSReader(inputFilename, clonespannedcolumns=True)
     sheet1  = inputFile.getSheet(u'Sheet1')
 
+    # Build output string
+    outputString =""" 
+using UnityEngine;
+using System.Collections;
+using System;
 
+public static enum tLOC_Identifier
+{
+"""
+    outputFile.write(outputString) 
+
+    s =''
     for i in range(len(sheet1)):
-        for j in range(len(sheet1[i])):
-            print (sheet1[i][j])
+        s += '\t_' + sheet1[i][0] + ' = ' + str(i) + ',\n'
+
+    s += '}\n'
+
+    outputFile.write(s)
+
+
+        
+#        for j in range(len(sheet1[i])):
+#            print (sheet1[i][j])
 
 
 if __name__ == "__main__":
