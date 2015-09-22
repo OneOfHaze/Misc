@@ -39,29 +39,18 @@ def main(argv):
     sheet1  = inputFile.getSheet(u'Sheet1')
 
     # Build output string
-    outputString =""" 
-using UnityEngine;
-using System.Collections;
-using System;
+    outputFile.write('using UnityEngine;\nusing System.Collections;\nusing System;\n\npublic static enum tLOC_Identifier\n{\n')
 
-public static enum tLOC_Identifier
-{
-"""
-    outputFile.write(outputString) 
-
-    s =''
-    for i in range(len(sheet1)):
-        s += '\t_' + sheet1[i][0] + ' = ' + str(i) + ',\n'
-
-    s += '}\n'
-
-    outputFile.write(s)
-
-
-        
-#        for j in range(len(sheet1[i])):
+#    for i in range(len(sheet1)):
+#       for j in range(len(sheet1[i])):
 #            print (sheet1[i][j])
 
+    for i in range (len(sheet1)):
+        outputFile.write ( '\t_' + sheet1[i][0] + ' = ' + str(i) + ',\n' )
+
+    outputFile.write ('};\n\n')
+
+    outputFile.close()
 
 if __name__ == "__main__":
     main(sys.argv[1:])
