@@ -33,22 +33,33 @@ def main(argv):
 
     # Open our output file...
     outputFile = open(outputFilename, 'w')
+    print('Opened file: ', outputFilename)
     
     # Open input spreadsheet and grab sheet 1
     inputFile = ODSReader(inputFilename, clonespannedcolumns=True)
     sheet1  = inputFile.getSheet(u'Sheet1')
+    print ('Opened input file, starting build...')
 
     # Build output string
-    outputFile.write('using UnityEngine;\nusing System.Collections;\nusing System;\n\npublic static enum tLOC_Identifier\n{\n')
+    outputFile.write('using UnityEngine;\nusing System.Collections;\nusing System;\n\npublic static class LOC_Strings\n{\n\n\tpublic enum tLOC_Identifier\n\t{\n')
 
 #    for i in range(len(sheet1)):
 #       for j in range(len(sheet1[i])):
 #            print (sheet1[i][j])
 
     for i in range (len(sheet1)):
-        outputFile.write ( '\t_' + sheet1[i][0] + ' = ' + str(i) + ',\n' )
+        outputFile.write ( '\t\t_' + sheet1[i][0] + ' = ' + str(i) + ',\n' )
 
-    outputFile.write ('};\n\n')
+    outputFile.write ('\t};\n\n')
+
+    print('English strings ...')
+    outputFile.write('\tpublic static string[] LOC_EnglishStrings = {' )
+
+    for i in range (len(sheet1)-1):
+        outputFile.write('\t\t\"'+ sheet1[i][1] + '\",\n')
+
+    outputFile.write('\t\"'+ sheet1[len(sheet1)-1][1] + '\"\n\t};\n}')
+
 
     outputFile.close()
 
