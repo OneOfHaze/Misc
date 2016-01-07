@@ -53,7 +53,7 @@ def main(argv):
     outputFile.write ('\t};\n\n')
 
     print('English strings ...')
-    outputFile.write('\tpublic static string[] LOC_EnglishStrings = {' )
+    outputFile.write('\tpublic static string[] LOC_EnglishStrings = {\n' )
 
     for i in range (len(sheet1)-1):
         outputFile.write('\t\t\"'+ sheet1[i][1] + '\",\n')
