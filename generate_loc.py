@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+# python3 generate_loc.py -i <file> -o <outfile>
 
 import sys, getopt, os.path
 from ODSReader import ODSReader
@@ -36,7 +36,7 @@ def main(argv):
     print('Opened file: ', outputFilename)
     
     # Open input spreadsheet and grab sheet 1
-    inputFile = ODSReader(inputFilename, clonespannedcolumns=True)
+    inputFile = ODSReader(inputFilename)
     sheet1  = inputFile.getSheet(u'Sheet1')
     print ('Opened input file, starting build...')
 
