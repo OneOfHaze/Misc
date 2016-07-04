@@ -1,1 +1,5 @@
 *.swp
+Lumo_Localisation/__pycache__/
+Lumo_Localisation/py3env/
+Lumo_Localisation/Loc.cs
+Lumo_Localisation/Kcheck vol.1-Lumo_LocDoc_JP update.ods
